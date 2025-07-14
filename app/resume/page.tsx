@@ -10,6 +10,7 @@ import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@
 import ResumeDropzone from "@/components/ResumeDropzone";
 import ReactMarkdown from "react-markdown";
 import { motion } from "framer-motion";
+import { Sparkles } from "lucide-react";
 
 const FEEDBACK_CACHE_KEY = "resume_feedback_cache";
 
@@ -106,8 +107,22 @@ export default function ResumeAnalyzerPage() {
                     </CardContent>
                 </Card>
             </motion.div>
-
-            {feedback && (
+            {
+                isLoading && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                    >
+                        <Card>
+                            <CardContent className="p-4 space-y-3">
+                                <div className="flex gap-x-3 items-center"> <Sparkles className="w-5 h-5 text-indigo-600 animate-bounce" /> <p className="animate-pulse"> Your resume is being processed...</p></div>
+                            </CardContent>
+                        </Card>
+                    </motion.div>
+                )
+            }
+            {(!isLoading && feedback) && (
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

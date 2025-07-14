@@ -16,7 +16,6 @@ const FEEDBACK_CACHE_KEY = "resume_feedback_cache";
 
 
 export default function ResumeAnalyzerPage() {
-    const [resumeText, setResumeText] = useState('');
     const [jobRole, setJobRole] = useState('');
     const [feedback, setFeedback] = useState('');
     const [isLoading, setIsLoading] = useState(false);

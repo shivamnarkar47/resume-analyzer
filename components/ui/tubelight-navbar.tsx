@@ -6,6 +6,7 @@ import Link from "next/link"
 import { LucideIcon, Sparkles } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ModeToggle } from "../mode-toggle"
+import { usePathname, useRouter } from "next/navigation"
 
 interface NavItem {
   name: string
@@ -21,11 +22,23 @@ interface NavBarProps {
 export function NavBar({ items, className }: NavBarProps) {
   const [activeTab, setActiveTab] = useState(items[0].name)
   const [isMobile, setIsMobile] = useState(false)
+  const location = usePathname()
+
+
+  useEffect(() => {
+    if (location == "/resume") {
+      setActiveTab("Analyze");
+    }
+  }, [location])
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768)
     }
+
+
+
+
 
     handleResize()
     window.addEventListener("resize", handleResize)
@@ -40,7 +53,9 @@ export function NavBar({ items, className }: NavBarProps) {
       )}
     >
       <div className="flex items-center gap-3 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
-        <Link href="/" className="items-center gap-2 fv  bn font-semibold flex text-foreground text-sm md:text-lg hover:opacity-80 transition px-5">
+        <Link href="/" className="items-center gap-2 fv  bn font-semibold flex text-foreground text-sm md:text-lg hover:opacity-80 transition px-5"
+          onClick={() => setActiveTab("Home")}
+        >
           <Sparkles className="w-5 h-5 text-indigo-600" />
           <p className="hidden md:flex">ResumeRite</p>
         </Link>
